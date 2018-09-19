@@ -6,7 +6,8 @@
     color: black;
     margin: 20px 20px 0px 20px;
     border-radius: 5px;
-    box-shadow: 5px 5px 2.5px grey; }
+    box-shadow: 5px 5px 2.5px grey; 
+}
 
 .container {
     margin-bottom: 0px;
@@ -65,7 +66,7 @@ body {
 #inputDestination.form-control, 
 #inputTime.form-control,
 #inputFrequency.form-control  {
-    width: 1065.6px
+    width: 1065.6px;
 }
 
 tr {
