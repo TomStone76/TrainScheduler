@@ -1,0 +1,74 @@
+.alert.alert-primary {
+    margin-bottom: 0px;
+    padding-left: 10px;
+    background-color: slategray;
+    border-color: slategray;
+    color: black;
+    margin: 20px 20px 0px 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2.5px grey; }
+
+.container {
+    margin-bottom: 0px;
+}
+
+#centered-form, #centered-table {
+    margin: auto;
+}
+
+#form-alert.alert.alert-primary {
+    margin-bottom: 10px;
+    width: 890px;
+    width: 1076.06px;
+    margin-top: 20px;
+    
+}
+
+#table-alert.alert.alert-primary {
+    width: 1076.06px;
+}
+
+.btn.btn-primary {
+    background-color: slategray;
+    border-color: slategray;
+    color: black;
+}
+
+#trainTable {
+    margin-left: 20px;
+    width: 1076.6px;
+}
+
+#train-info {
+    margin-left: 32px;
+    margin-bottom: 20px;
+}
+
+
+.jumbotron.jumbotron-fluid {
+    background-color: slategray;
+    color: black;
+    margin: 20px 20px 20px 20px;
+    border-radius: 5px;
+    font-family: 'Vollkorn', serif;
+    font-style: bold;
+    text-align: center;
+    width: 1076.6px;
+    box-shadow:5px 5px 2.5px grey; 
+}
+
+body {
+    background: url("whirlpool.png");
+}
+
+#inputName.form-control, 
+#inputDestination.form-control, 
+#inputTime.form-control,
+#inputFrequency.form-control  {
+    width: 1065.6px
+}
+
+tr {
+    width: 1076.6px;
+}
+
