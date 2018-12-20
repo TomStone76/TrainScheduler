@@ -6,7 +6,13 @@
     color: black;
     margin: 20px 20px 0px 20px;
     border-radius: 5px;
-    box-shadow: 5px 5px 2.5px grey; 
+    box-shadow:3px 3px 1.5px grey;
+}
+
+h1 {
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .container {
@@ -55,7 +61,7 @@
     font-style: bold;
     text-align: center;
     width: 1076.6px;
-    box-shadow:3.5px 3.5px 2.5px grey; 
+    box-shadow:3px 3px 1.5px grey; 
 }
 
 #inputName.form-control, 
