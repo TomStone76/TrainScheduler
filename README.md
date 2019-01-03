@@ -9,3 +9,5 @@ Bootstrap, and
 Firebase
 
 ![Screenshot](screenshot.png)
+
+© 2018 Thomas Joseph Stone
