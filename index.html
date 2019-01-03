@@ -40,103 +40,105 @@
                 </tbody>
             </table>
         </div>
-    
- 
-    <div class="container">
-        <div id="centered-form">
-            <div class="alert alert-primary" id="form-alert" role="alert">
-                <b>Add Train</b>
+
+
+        <div class="container">
+            <div id="centered-form">
+                <div class="alert alert-primary" id="form-alert" role="alert">
+                    <b>Add Train</b>
+                </div>
+                <form id="train-info">
+                    <div class="form-group">
+                        <label><b>Train Name</b></label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Enter name here...">
+                    </div>
+                    <div class="form-group">
+                        <label><b>Destination</b></label>
+                        <input type="text" class="form-control" id="inputDestination" placeholder="Enter destination here...">
+                    </div>
+                    <div class="form-group">
+                        <label><b>First Train Time (HH:mm - military time)</b></label>
+                        <input type="text" class="form-control" id="inputTime" placeholder="Enter first train time here...">
+                    </div>
+                    <div class="form-group">
+                        <label><b>Frequency (min.)</b></label>
+                        <input type="text" class="form-control" id="inputFrequency" placeholder="Enter frequency here...">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+                </form>
             </div>
-            <form id="train-info">
-                <div class="form-group">
-                    <label><b>Train Name</b></label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Enter name here...">
-                </div>
-                <div class="form-group">
-                    <label><b>Destination</b></label>
-                    <input type="text" class="form-control" id="inputDestination" placeholder="Enter destination here...">
-                </div>
-                <div class="form-group">
-                    <label><b>First Train Time (HH:mm - military time)</b></label>
-                    <input type="text" class="form-control" id="inputTime" placeholder="Enter first train time here...">
-                </div>
-                <div class="form-group">
-                    <label><b>Frequency (min.)</b></label>
-                    <input type="text" class="form-control" id="inputFrequency" placeholder="Enter frequency here...">
-                </div>
-                <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
-            </form>
         </div>
-    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
 
-    <script>
-
-        var config = {
-            apiKey: "AIzaSyA_aHk6m2hndciGwfR_Czgfal3-utZ4YMw",
-            authDomain: "trainscheduler-e3eae.firebaseapp.com",
-            databaseURL: "https://trainscheduler-e3eae.firebaseio.com",
-            projectId: "trainscheduler-e3eae",
-            storageBucket: "",
-            messagingSenderId: "271016486536"
-        };
-
-        firebase.initializeApp(config);
-
-        var database = firebase.database();
-
-        $("#submit-button").on("click", function (event) {
-            event.preventDefault();
-            console.log("Working!");
-            var tName = $("#inputName").val().trim();
-            var tDest = $("#inputDestination").val().trim();
-            var tTime = $("#inputTime").val().trim();
-            var tFreq = $("#inputFrequency").val().trim();
-
-            var trainInfo = {
-                Name: tName,
-                Destination: tDest,
-                Time: tTime,
-                Frequency: tFreq
+        <script>
+            var config = {
+                apiKey: "AIzaSyA_aHk6m2hndciGwfR_Czgfal3-utZ4YMw",
+                authDomain: "trainscheduler-e3eae.firebaseapp.com",
+                databaseURL: "https://trainscheduler-e3eae.firebaseio.com",
+                projectId: "trainscheduler-e3eae",
+                storageBucket: "",
+                messagingSenderId: "271016486536"
             };
 
-            database.ref().push(trainInfo);
+            firebase.initializeApp(config);
 
-            $("#inputName").val("");
-            $("#inputDestination").val("");
-            $("#inputTime").val("");
-            $("#inputFrequency").val("");
-        });
+            var database = firebase.database();
 
-        database.ref().on("child_added", function (childSnapshot) {
-            var tName = childSnapshot.val().Name;
-            var tDest = childSnapshot.val().Destination;
-            var tTime = childSnapshot.val().Time;
-            var tFreq = childSnapshot.val().Frequency;
-            var timeConv = moment(tTime, "HH:mm").subtract(1, "years");
-            var currentTime = moment();
-            var diffTime = moment().diff(moment(timeConv), "minutes");
-            var tRem = diffTime % tFreq;
-            var minAway = tFreq - tRem;
-            var nextArr = moment().add(minAway, "minutes");
-            var nextArrConv = moment(nextArr, "HH:mm").subtract(1, "years");
-            var nextArrConv = moment(nextArr).format("MMMM Do YYYY, h:mm:ss a");
+            $("#submit-button").on("click", function (event) {
+                event.preventDefault();
+                console.log("Working!");
+                var tName = $("#inputName").val().trim();
+                var tDest = $("#inputDestination").val().trim();
+                var tTime = $("#inputTime").val().trim();
+                var tFreq = $("#inputFrequency").val().trim();
 
-            var newTR = $("<tr>").append(
-                $("<td>").text(tName),
-                $("<td>").text(tDest),
-                $("<td>").text(tFreq),
-                $("<td>").text(nextArrConv),
-                $("<td>").text(minAway)
-            );
+                var trainInfo = {
+                    Name: tName,
+                    Destination: tDest,
+                    Time: tTime,
+                    Frequency: tFreq
+                };
 
-            $("#trainTable > tbody").append(newTR);
+                database.ref().push(trainInfo);
 
-        });
+                $("#inputName").val("");
+                $("#inputDestination").val("");
+                $("#inputTime").val("");
+                $("#inputFrequency").val("");
+            });
 
-    </script>
+            database.ref().on("child_added", function (childSnapshot) {
+                var tName = childSnapshot.val().Name;
+                var tDest = childSnapshot.val().Destination;
+                var tTime = childSnapshot.val().Time;
+                var tFreq = childSnapshot.val().Frequency;
+                var timeConv = moment(tTime, "HH:mm").subtract(1, "years");
+                var currentTime = moment();
+                var diffTime = moment().diff(moment(timeConv), "minutes");
+                var tRem = diffTime % tFreq;
+                var minAway = tFreq - tRem;
+                var nextArr = moment().add(minAway, "minutes");
+                var nextArrConv = moment(nextArr, "HH:mm").subtract(1, "years");
+                var nextArrConv = moment(nextArr).format("MMMM Do YYYY, h:mm:ss a");
 
+                var newTR = $("<tr>").append(
+                    $("<td>").text(tName),
+                    $("<td>").text(tDest),
+                    $("<td>").text(tFreq),
+                    $("<td>").text(nextArrConv),
+                    $("<td>").text(minAway)
+                );
+
+                $("#trainTable > tbody").append(newTR);
+
+            });
+        </script>
+
+    </div>
+
+    <div id="copyright">
+    <p>© 2018 Thomas Joseph Stone</p>
     </div>
 
 </body>
